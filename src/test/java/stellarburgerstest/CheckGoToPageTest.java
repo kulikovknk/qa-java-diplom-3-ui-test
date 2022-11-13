@@ -1,5 +1,6 @@
 package stellarburgerstest;
 
+import dto.UserRequest;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.Assert;
 import org.junit.Test;
@@ -7,9 +8,7 @@ import stellarburgers.BurgersAccountProfilePage;
 import stellarburgers.BurgersLoginPage;
 import stellarburgers.BurgersMainPage;
 
-import java.util.HashMap;
-
-import static generator.UserAccountGenerator.getExistingUserAccount;
+import static generator.UserRequestGenerator.getExistingUserRequest;
 
 public class CheckGoToPageTest extends BaseUITest {
 
@@ -18,7 +17,7 @@ public class CheckGoToPageTest extends BaseUITest {
     // тест на переход по клику в «Личный кабинет»
     public void goToLogInPageTest() {
 
-        logInCustomer(getExistingUserAccount());
+        logInCustomer(getExistingUserRequest());
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
@@ -32,7 +31,7 @@ public class CheckGoToPageTest extends BaseUITest {
     // тест на переход из личного кабинета в конструктор по клику на «Конструктор»
     public void clickConstructorButtonTest() {
 
-        logInCustomer(getExistingUserAccount());
+        logInCustomer(getExistingUserRequest());
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
@@ -50,7 +49,7 @@ public class CheckGoToPageTest extends BaseUITest {
     // Тест на переход из личного кабинета в конструктор по клику на логотип Stellar Burgers
     public void clickStellarBurgerLogoTest() {
 
-        logInCustomer(getExistingUserAccount());
+        logInCustomer(getExistingUserRequest());
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
@@ -63,12 +62,12 @@ public class CheckGoToPageTest extends BaseUITest {
 
     }
 
-    private void logInCustomer(HashMap<String, String> userAccount) {
+    private void logInCustomer(UserRequest userRequest) {
 
         BurgersLoginPage objBurgersLoginPage = new BurgersLoginPage(driver);
 
         objBurgersLoginPage.openPage();
-        objBurgersLoginPage.fillInCustomerData(userAccount);
+        objBurgersLoginPage.fillInCustomerData(userRequest);
         objBurgersLoginPage.clickLoginButton();
 
     }

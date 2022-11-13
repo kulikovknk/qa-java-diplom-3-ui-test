@@ -1,12 +1,12 @@
 package stellarburgers;
 
+import dto.UserRequest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.HashMap;
 
 public class BurgersLoginPage extends BurgersBasePage {
 
@@ -35,9 +35,9 @@ public class BurgersLoginPage extends BurgersBasePage {
                 .until(ExpectedConditions.urlContains(BURGERS_MAIN_PAGE));
     }
 
-    public void fillInCustomerData(HashMap<String, String> userAccount) {
-        driver.findElement(fieldEmail).sendKeys(userAccount.get("email"));
-        driver.findElement(fieldPassword).sendKeys(userAccount.get("password"));
+    public void fillInCustomerData(UserRequest userRequest) {
+        driver.findElement(fieldEmail).sendKeys(userRequest.getEmail());
+        driver.findElement(fieldPassword).sendKeys(userRequest.getPassword());
     }
 
 }

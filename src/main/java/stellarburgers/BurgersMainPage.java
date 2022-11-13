@@ -21,7 +21,8 @@ public class BurgersMainPage extends BurgersBasePage {
     // переключатель "Начинки"
     private final By sectionFillings = By.xpath(".//section[@class = 'BurgerIngredients_ingredients__1N8v2']//div/div[3]");
     // имя класса элемента при переключении на секцию в разделе "Конструктор"
-    private final String classNameWhenConstructorSectionIsChosen = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+//    private final String CLASS_NAME_WHEN_CONSTRUCTOR_SECTION_IS_CHOSEN = "tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect";
+    private final String CLASS_NAME_WHEN_CONSTRUCTOR_SECTION_IS_CHOSEN = "tab_tab_type_current__2BEPc";
 
     public BurgersMainPage(WebDriver driver) {
         super(driver);
@@ -99,7 +100,7 @@ public class BurgersMainPage extends BurgersBasePage {
     }
 
     private boolean checkIfSectionChosen(WebElement section) {
-        return section.getAttribute("class").equals(classNameWhenConstructorSectionIsChosen);
+        return section.getAttribute("class").contains(CLASS_NAME_WHEN_CONSTRUCTOR_SECTION_IS_CHOSEN);
     }
 
 }

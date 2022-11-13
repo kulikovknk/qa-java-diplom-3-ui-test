@@ -1,12 +1,14 @@
 package stellarburgers;
 
+import dto.UserRequest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.HashMap;
+import java.util.List;
 
 public class BurgersRegisterPage extends BurgersBasePage {
 
@@ -36,16 +38,21 @@ public class BurgersRegisterPage extends BurgersBasePage {
 
     }
 
-    public void fillInCustomerData(HashMap<String, String> userAccount) {
+    public void fillInCustomerData(UserRequest userRequest) {
 
-        driver.findElement(fieldName).sendKeys(userAccount.get("name"));
-        driver.findElement(fieldEmail).sendKeys(userAccount.get("email"));
-        driver.findElement(fieldPassword).sendKeys(userAccount.get("password"));
+        driver.findElement(fieldName).sendKeys(userRequest.getName());
+        driver.findElement(fieldEmail).sendKeys(userRequest.getEmail());
+        driver.findElement(fieldPassword).sendKeys(userRequest.getPassword());
 
     }
 
     public void clickRegisterButton() {
         driver.findElement(buttonRegister).click();
+
+        // указываю явное ожидание, чтобы дождаться загрузки любой страницы,
+        // которая должна загрузиться в зависимости от результата регистрации (положительного или нет)
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
     }
 
     public void clickLogInButton() {
@@ -56,7 +63,11 @@ public class BurgersRegisterPage extends BurgersBasePage {
     }
 
     public boolean isIncorrectPasswordMessageVisible() {
-        return driver.findElement(messageIncorrectPassword).isDisplayed();
+
+        List<WebElement> elements = driver.findElements(messageIncorrectPassword);
+
+        return elements.size() != 0;
+
     }
 
     public boolean isMainPageOpened() {
