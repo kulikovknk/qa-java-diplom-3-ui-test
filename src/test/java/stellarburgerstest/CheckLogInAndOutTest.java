@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import stellarburgers.*;
 
-import static generator.UserRequestGenerator.getExistingUserRequest;
 import static generator.UserRequestGenerator.getNewUserRequest;
 
 public class CheckLogInAndOutTest extends BaseUITest {
@@ -120,7 +119,9 @@ public class CheckLogInAndOutTest extends BaseUITest {
     // тест на выход по кнопке «Выйти» в личном кабинете
     public void logOutCustomerTest() {
 
-        logInCustomer(getExistingUserRequest());
+        UserRequest userRequest = registerNewCustomer();
+
+        logInCustomer(userRequest);
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();

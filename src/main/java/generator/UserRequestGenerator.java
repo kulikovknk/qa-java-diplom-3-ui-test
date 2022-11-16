@@ -24,15 +24,4 @@ public class UserRequestGenerator {
 
     }
 
-    public static UserRequest getExistingUserRequest() {
-
-        UserRequest userRequest = new UserRequest();
-
-        userRequest.setName("hgfJGjJHGJ");
-        userRequest.setEmail("hgfJGjJHGJ@mail.ru");
-        userRequest.setPassword("HGjjGGfjtFJGFJGf");
-
-        return userRequest;
-    }
-
 }

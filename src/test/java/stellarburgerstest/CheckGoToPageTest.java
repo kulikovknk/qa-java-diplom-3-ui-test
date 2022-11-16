@@ -8,7 +8,7 @@ import stellarburgers.BurgersAccountProfilePage;
 import stellarburgers.BurgersLoginPage;
 import stellarburgers.BurgersMainPage;
 
-import static generator.UserRequestGenerator.getExistingUserRequest;
+import static generator.UserRequestGenerator.getNewUserRequest;
 
 public class CheckGoToPageTest extends BaseUITest {
 
@@ -17,10 +17,14 @@ public class CheckGoToPageTest extends BaseUITest {
     // тест на переход по клику в «Личный кабинет»
     public void goToLogInPageTest() {
 
-        logInCustomer(getExistingUserRequest());
+        UserRequest userRequest = registerNewCustomer();
+
+        logInCustomer(userRequest);
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
+
+        clearUserData(userRequest);
 
         Assert.assertTrue("Переход в личный кабинет по кнопке \"Личный кабинет\" не работает",
                 objBurgersMainPage.isAccountProfilePageOpened());
@@ -31,13 +35,17 @@ public class CheckGoToPageTest extends BaseUITest {
     // тест на переход из личного кабинета в конструктор по клику на «Конструктор»
     public void clickConstructorButtonTest() {
 
-        logInCustomer(getExistingUserRequest());
+        UserRequest userRequest = registerNewCustomer();
+
+        logInCustomer(userRequest);
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
 
         BurgersAccountProfilePage objBurgersAccountProfilePage = new BurgersAccountProfilePage(driver);
         objBurgersAccountProfilePage.clickConstructorButton();
+
+        clearUserData(userRequest);
 
         Assert.assertTrue("Переход на главную страницу по кнопке \"Конструктор\" не работает",
                 objBurgersAccountProfilePage.isMainPageOpened());
@@ -49,13 +57,17 @@ public class CheckGoToPageTest extends BaseUITest {
     // Тест на переход из личного кабинета в конструктор по клику на логотип Stellar Burgers
     public void clickStellarBurgerLogoTest() {
 
-        logInCustomer(getExistingUserRequest());
+        UserRequest userRequest = registerNewCustomer();
+
+        logInCustomer(userRequest);
 
         BurgersMainPage objBurgersMainPage = new BurgersMainPage(driver);
         objBurgersMainPage.clickPersonalAccountButton();
 
         BurgersAccountProfilePage objBurgersAccountProfilePage = new BurgersAccountProfilePage(driver);
         objBurgersAccountProfilePage.clickStellarBurgersLogo();
+
+        clearUserData(userRequest);
 
         Assert.assertTrue("Переход на главную страницу при нажатии на логотип \"Stellar Burger\" не работает",
                 objBurgersAccountProfilePage.isMainPageOpened());
@@ -70,6 +82,15 @@ public class CheckGoToPageTest extends BaseUITest {
         objBurgersLoginPage.fillInCustomerData(userRequest);
         objBurgersLoginPage.clickLoginButton();
 
+    }
+
+    private UserRequest registerNewCustomer() {
+
+        UserRequest userRequest = getNewUserRequest(8,6);
+
+        createUser(userRequest);
+
+        return userRequest;
     }
 
 }
