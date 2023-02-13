@@ -129,6 +129,8 @@ public class CheckLogInAndOutTest extends BaseUITest {
         BurgersAccountProfilePage objBurgersAccountProfilePage = new BurgersAccountProfilePage(driver);
         objBurgersAccountProfilePage.clickLogoutButton();
 
+        clearUserData(userRequest);
+
         Assert.assertTrue("Выход по кнопке «Выйти» в личном кабинете не работает",
                 objBurgersAccountProfilePage.isLoginPageOpened());
 
