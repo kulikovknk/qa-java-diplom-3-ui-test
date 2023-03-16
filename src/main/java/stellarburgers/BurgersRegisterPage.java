@@ -49,7 +49,7 @@ public class BurgersRegisterPage extends BurgersBasePage {
     public void clickRegisterButton() {
         driver.findElement(buttonRegister).click();
 
-        // указываю явное ожидание, чтобы дождаться загрузки любой страницы,
+        // указываю неявное ожидание, чтобы дождаться загрузки любой страницы,
         // которая должна загрузиться в зависимости от результата регистрации (положительного или нет)
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 
